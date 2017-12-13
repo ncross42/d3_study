@@ -89,7 +89,31 @@ function em2() {
   console.log('rect len: ', r._groups[0].length);
 }
 
+function custom1() {
+  const doc = d3.selection();
+  console.log(doc._groups[0][0].nodeName);
+
+  d3.selection.prototype.changeText = (text) => {
+    this.text(text);
+  };
+
+  d3.selectAll('em').changeText('텍스트수정');
+}
+
+function ul1() {
+  const sel = d3.selectAll('li');
+  const nod = sel.filter('.first');
+  console.log( nod._groups[0][0].textContent );
+  const el = sel.filter( (d,i) => {
+    if (this.className === 'second') {
+      return this;
+    }
+  });
+}
+
 window.onload = function(){
+  ul1();
+  custom1();
   em2();
   em1();
   rect1();
